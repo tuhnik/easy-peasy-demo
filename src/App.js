@@ -1,28 +1,22 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Input from './Input'
+import { useStore, useActions } from 'easy-peasy';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+function App(){
+  const items = useStore(state => state.items)
+  const full = useStore(state => state.full)
+  const remove = useActions(actions => actions.remove)
+
+  return <div className="App">
+    {full && <div>"Sorry, but the list is full! Try deleting some items..."</div>}
+     <Input/>
+     {items.map((el, i)=>{
+       return <div key={i}>{el}
+       <button onClick={()=>remove(i)}>X</button>
+       </div>
+     })}
+     </div>
 }
 
 export default App;
