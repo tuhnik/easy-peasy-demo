@@ -4,7 +4,7 @@ import App from './App';
 import store from './store.js'
 import { StoreProvider } from 'easy-peasy';
 
-//make store global
+//make store accessible through console
 window.store = store
 
 ReactDOM.render(
