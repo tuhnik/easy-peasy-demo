@@ -1,22 +1,22 @@
 import React from 'react';
-import Input from './Input'
-import { useStore, useActions } from 'easy-peasy';
+import Consumption from './components/Consumption'
+import SetupType from './components/SetupType'
+import Area from './components/Area'
+import Roof from './components/Roof'
+import Orientation from './components/Orientation'
+import Result from './components/Result'
+import './App.css'
 
 
-function App(){
-  const items = useStore(state => state.items)
-  const full = useStore(state => state.full)
-  const remove = useActions(actions => actions.remove)
-
+function App() {
   return <div className="App">
-    {full && <div>"Sorry, but the list is full! Try deleting some items..."</div>}
-     <Input/>
-     {items.map((el, i)=>{
-       return <div key={i}>{el}
-       <button onClick={()=>remove(i)}>X</button>
-       </div>
-     })}
-     </div>
+    <Consumption></Consumption>
+    <SetupType></SetupType>
+    <Area></Area>
+    <Roof></Roof>
+    <Orientation></Orientation>
+    <Result></Result>
+  </div>
 }
 
 export default App;
