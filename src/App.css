@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 div {
     padding: 0.2em
 }
@@ -5,3 +7,7 @@ div {
 input, select {
     margin: 0 0.5em;
 }
+
+*{
+    font-family: 'Open Sans',serif;
+ }
