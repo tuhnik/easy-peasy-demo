@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+body {
+    /* background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/skulls.png"); */
+}
+
 div {
     padding: 0.2em
 }
