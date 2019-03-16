@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from 'easy-peasy';
-import calculator from './calculator.js'
+import calculator from '../utils/calculator.js'
 
 function Result() {
     const area = useStore(state => state.input.area)

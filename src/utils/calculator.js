@@ -1,4 +1,4 @@
-import data from "./dataset.js"
+import data from "./data.js"
 
 function calculator(hooneTüüp, tarbimine, paigaldusviis, pindala, kalle, orientatsioon){
     //remove later

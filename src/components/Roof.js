@@ -13,8 +13,10 @@ function Roof() {
     }
 
     return <div className="Roof">
+    Katuse kalle:
         <form>
             <div className="radio"> <label><input onChange={radioChanged} type="radio" value="15" checked={ roofDegrees===15 } /> 15° </label> </div>
+            <div className="radio"> <label><input onChange={radioChanged} type="radio" value="20" checked={ roofDegrees===20 } /> 20° </label> </div>
             <div className="radio"> <label><input onChange={radioChanged} type="radio" value="25" checked={ roofDegrees===25 } /> 25° </label> </div>
             <div className="radio"> <label><input onChange={radioChanged} type="radio" value="30" checked={ roofDegrees===30 } /> 30° </label> </div>
             <div className="radio"> <label><input onChange={radioChanged} type="radio" value="35" checked={ roofDegrees===35 } /> 35° </label> </div>
