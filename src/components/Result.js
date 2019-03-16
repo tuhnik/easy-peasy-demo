@@ -12,11 +12,8 @@ function Result() {
     
     let res = calculator(buildingType, consumption, setupType, area, roofDegrees, orientation)
 
-    if(!res || !res.tasuvus){return <div></div>}
-   
-
+    
     return <div className="Result">
-       
        <hr/>
        Paneelide arv: {res.paneelideArv} <Br/>
        Võimsus: {Math.round(res.võimsus * 100) / 100} kW <Br/>
