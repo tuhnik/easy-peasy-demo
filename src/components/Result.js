@@ -79,12 +79,12 @@ function Result() {
             borderWidth: 1
         },
         {data: cal_omatarbimine.map(el=>Math.round(el)), 
-            label: "Ise tarbitud (kWh)",
+            label: "Oma tarbeks (kWh)",
             type: "line",
             backgroundColor: "#e89722"
         },
         {data: cal_võrku.map(el=>Math.round(el)), 
-            label: "Võrku müüdud (kWh)",
+            label: "Müük võrku (kWh)",
             type: "line",
             backgroundColor: "#5cbd4ca6"
         }   
