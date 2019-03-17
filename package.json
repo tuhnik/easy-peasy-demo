@@ -3,16 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@quantlab/formulajs": "^1.1.2",
+    "chart.js": "^2.8.0",
     "easy-peasy": "^1.14.1",
-    "exceljs": "^1.7.0",
-    "formulajs": "^1.0.8",
-    "fxjs": "^0.1.7",
     "react": "^16.8.4",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8",
-    "xlsx": "^0.14.1",
-    "xlsx-calc": "^0.5.9"
+    "react-scripts": "2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",

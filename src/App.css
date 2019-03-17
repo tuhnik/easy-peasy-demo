@@ -16,3 +16,23 @@ input, select {
 *{
     font-family: 'Open Sans',serif;
  }
+
+ .result-first {
+     display: flex
+ }
+
+ .graphs {
+    display: flex;
+    height: 100%
+  
+}
+
+.graph {
+    text-align: center;
+    font-weight: 700;
+    width: 50%
+}
+
+.roof-form {
+    display: flex
+}

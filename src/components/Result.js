@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStore } from 'easy-peasy';
 import calculator from '../utils/calculator.js'
+import {Doughnut, Bar, Line} from 'react-chartjs-2';
 
 function Result() {
     const area = useStore(state => state.input.area)
@@ -11,26 +12,100 @@ function Result() {
     const orientation = useStore(state => state.input.orientation)
     
     let res = calculator(buildingType, consumption, setupType, area, roofDegrees, orientation)
-
     
+
+    const data = {
+        labels: ['Oma tarbeks - '+ res.esimeneAasta.omatarbimiseProtsent + '%', 'Müük võrku - '+(100 - res.esimeneAasta.omatarbimiseProtsent)+ '%'],
+        
+        datasets: [{
+            data: [res.esimeneAasta.omatarbimiseProtsent, 100 - res.esimeneAasta.omatarbimiseProtsent],
+            backgroundColor: ['#e89722', '#5cbd4c'] }]
+    }
+
+    let years = [2019]
+    for(let i=1; i<26; i++){
+        years.push(2019+i)
+    }
+
+    const tasuvusandmed = {
+        labels: years,
+        datasets: [{data: res.tasuvus.data.map(el=>Math.round(el)), 
+            label: "EUR",
+            backgroundColor: "#5cbd4ca6"
+        },        
+        ]
+    }
+    let cal = res.esimeneAasta.kalender
+    let cal_months = []
+    let cal_tarbimine = []
+    let cal_omatarbimine = []
+    let cal_võrku = []
+
+    for (let el in cal){
+        cal_months.push(el)
+        cal_tarbimine.push(cal[el].tarbimine)
+        cal_omatarbimine.push(cal[el].omatarbimine)
+        cal_võrku.push(cal[el].võrku)
+    }
+    const aastaandmed = {
+        labels: cal_months,
+        datasets: [{data: cal_tarbimine.map(el=>Math.round(el)), 
+            label: "Senine tarbimine (kWh)",
+            type: "bar",
+            backgroundColor: "#03a9f444",
+            borderColor: "#03a9f4",
+            borderWidth: 1
+        },{data: cal_omatarbimine.map(el=>Math.round(el)), 
+            label: "Ise tarbitud (kWh)",
+            type: "line",
+            backgroundColor: "#e89722"
+        },
+        {data: cal_võrku.map(el=>Math.round(el)), 
+            label: "Võrku müüdud (kWh)",
+            type: "line",
+            backgroundColor: "#5cbd4ca6"
+        }   
+        ]
+    }
+   
     return <div className="Result">
        <hr/>
-       Paneelide arv: {res.paneelideArv} <Br/>
-       Võimsus: {Math.round(res.võimsus * 100) / 100} kW <Br/>
-       Tarbimine: {Math.round(res.esimeneAasta.tarbimine)} kWh<Br/>
-       Aastane toodang: {Math.round(res.esimeneAasta.kogutoodang)} kWh <Br/>
-       Sellest oma tarbeks: {Math.round(res.esimeneAasta.omaTarbeks)} kWh ({res.esimeneAasta.omatarbimiseProtsent}%)<Br/>
-       Sellest võrku: {Math.round(res.esimeneAasta.müükVõrku)} kWh ({res.esimeneAasta.müükVõrkuProtsent}%)<Br/>
+      <div className="result-first">
+        <div>
+        Paneelide arv: {res.paneelideArv} <Br/>
+        Võimsus: {Math.round(res.võimsus * 100) / 100} kW <Br/>
+        Tarbimine: {Math.round(res.esimeneAasta.tarbimine)} kWh<Br/>
+        Aastane toodang: {Math.round(res.esimeneAasta.kogutoodang)} kWh <Br/>
+        Sellest oma tarbeks: {Math.round(res.esimeneAasta.omaTarbeks)} kWh ({res.esimeneAasta.omatarbimiseProtsent}%)<Br/>
+        Sellest võrku: {Math.round(res.esimeneAasta.müükVõrku)} kWh ({res.esimeneAasta.müükVõrkuProtsent}%)<Br/>
+        </div>
+        <div style={{}}>
+            <Doughnut data={data} options={{cutoutPercentage: 60,
+                maintainAspectRatio: false,
+                tooltips: {enabled: false},
+                legend: {position: "right"}
+            }}/>
+            </div>
+            </div> 
        <hr/>
        Maksumus (KM-ga): {Math.round(res.tasuvus.maksumus)} €<Br/>
        Eeldatav sääst 1. aastal: {Math.round(res.tasuvus.säästEsimeselAastal)} €<Br/>
-       Eeldatav sääst eluea (25. aastat) peale: {Math.round(res.tasuvus.säästKokku)} €<Br/>
-       Kasum eluea (25. aastat) peale: {Math.round(res.tasuvus.kasum)} €<Br/>
+       Eeldatav sääst eluea (25 aastat) peale: {Math.round(res.tasuvus.säästKokku)} €<Br/>
+       Kasum eluea (25 aastat) peale: {Math.round(res.tasuvus.kasum)} €<Br/>
        Tasuvusaeg: {Math.round(res.tasuvus.tasuvusaeg * 10) / 10} aastat<Br/>
        <hr/>
-       Andmed 1. aasta graafiku jaoks: {JSON.stringify(res.esimeneAasta.kalender)}<Br/>
+       <div className="graphs">
+        <div className="graph"> 2019<Br/>       
+            <Bar data={aastaandmed}/>
+        </div>
+        <div className="graph"> Tasuvus 25 aasta jooksul <Br/> 
+            <Line data={tasuvusandmed}/>
+        </div>
+       </div>
+       
+    
        <hr/>
-       Andmed 25 aasta tasuvusgraafiku jaoks: {JSON.stringify(res.tasuvus.data, null, 4)}
+  
     </div>
 }
 
@@ -39,3 +114,7 @@ function Br(){
 }
 
 export default Result;
+
+// colorScheme={['#e89722', '#ebf3ed']}
+
+
