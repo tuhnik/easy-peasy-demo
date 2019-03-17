@@ -20,7 +20,6 @@ function Result() {
     
     let res = calculator(buildingType, consumption, setupType, area, roofDegrees, orientation)
     
-    
     const donut1data = {
         labels: ['Oma tarbeks - '+ res.esimeneAasta.omatarbimiseProtsent + '%', 'Müük võrku - '+(100 - res.esimeneAasta.omatarbimiseProtsent)+ '%'],
         
@@ -52,7 +51,7 @@ function Result() {
         labels: years,
         datasets: [{data: res.tasuvus.data.map(el=>Math.round(el)), 
             label: "EUR",
-            backgroundColor: "#ff889fc7"
+            backgroundColor: "#8bc34a7c"
         },        
         ]
     }
@@ -101,7 +100,7 @@ function Result() {
         {data: cal_omatarbimine.map(el=>Math.round(el)), 
             label: "Oma tarbeks (kWh)",
             type: "line",
-            backgroundColor: "#e89722"
+            backgroundColor: "#e89722c7"
         },
         {data: cal_võrku.map(el=>Math.round(el)), 
             label: "Müük võrku (kWh)",
@@ -158,7 +157,6 @@ function Result() {
         </div>
        </div>
        
-    
        <hr/>
   
     </div>
@@ -194,5 +192,3 @@ function textToCenter(chart, easing) {
     let unitTextX = Math.round((width - ctx.measureText(unitText).width) / 2)
     ctx.fillText(unitText, unitTextX, textY + fontSize * 18);
 }
-
-
