@@ -6,7 +6,7 @@ body {
 }
 
 div {
-    padding: 0.2em
+    padding: 0.1em
 }
 
 input, select {
@@ -35,4 +35,14 @@ input, select {
 
 .roof-form {
     display: flex
+}
+
+.donut-container {
+    color:#4c5b68;
+    text-align: center
+}
+
+.donut-container > span {
+    margin-bottom: 0.4em;
+    display: inherit;
 }
