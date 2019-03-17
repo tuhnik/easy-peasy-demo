@@ -1,42 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useStore } from 'easy-peasy';
 import calculator from '../utils/calculator.js'
 import {Doughnut, Bar, Line, Chart} from 'react-chartjs-2';
 
 function Result() {
-
-    Chart.pluginService.register({
-		beforeDraw: function (chart, easing) {
-            var ctx = chart.ctx;
-            var width = chart.width;
-            var height = chart.height;
-            ctx.clearRect(0, 0, width, height)
-            var fontSize = (height / 114).toFixed(2);
-            ctx.font = "bold " +fontSize + "em Verdana";
-            ctx.textBaseline = "middle";
-            ctx.fillStyle = "#4c5b68";
-
-            var percentageText = chart.config.data.percentageText || "",
-                textX = Math.round((width - ctx.measureText(percentageText).width) / 2),
-                textY = height / 2;
-            
-            ctx.fillText(percentageText, textX, textY - 12);
-
-
-            var kwhText = chart.config.data.kwhText || ""
-            ctx.font = (fontSize - 0.3)+ "em Verdana";
-            let kwhTextX = Math.round((width - ctx.measureText(kwhText).width) / 2)
-            ctx.fillText(kwhText, kwhTextX, textY+ 5);
-
-            var unitText = chart.config.data.unitText || ""
-            ctx.font = (fontSize - 0.6)+ "em Verdana";
-            let unitTextX = Math.round((width - ctx.measureText(unitText).width) / 2)
-            ctx.fillText(unitText, unitTextX, textY+ 20);
-
-
-		}
-    });
-    
+    useEffect(()=>{
+        Chart.pluginService.register({
+            beforeDraw: textToCenter
+        });
+        
+    }, [])
+   
     const area = useStore(state => state.input.area)
     const buildingType = useStore(state => state.input.buildingType)
     const consumption = useStore(state => state.input.consumption)
@@ -82,7 +56,6 @@ function Result() {
         },        
         ]
     }
-    console.log(res)
     const tasuvusoptions = {
         scales: {
             yAxes: [{
@@ -151,16 +124,21 @@ function Result() {
         </div>
         <div className="donut-container">
             <span>Oma tarbeks</span>
-            <Doughnut data={donut1data} options={{cutoutPercentage: 70,
+            <Doughnut height={100} width={100}data={donut1data} options={{
+                cutoutPercentage: 70,
                 tooltips: {enabled: false},
-                legend: {display: false}
+                legend: {display: false},
+                hover: {mode: null},
+                aspectRatio: 1
             }}/>
          </div>
          <div className="donut-container">
             <span>Müük võrku</span>
-            <Doughnut data={donut2data} options={{cutoutPercentage: 70,
+            <Doughnut height={100} width={100} data={donut2data} plugins={[{textToCenter}]} options={{
+                cutoutPercentage: 70,
                 tooltips: {enabled: false},
-                legend: {display: false}
+                legend: {display: false},
+                hover: {mode: null},
             }}/>
          </div>
         </div> 
@@ -192,6 +170,29 @@ function Br(){
 
 export default Result;
 
-// colorScheme={['#e89722', '#ebf3ed']}
+function textToCenter(chart, easing) {
+    let ctx = chart.ctx;
+    let width = chart.width;
+    let height = chart.height;
+    ctx.clearRect(0, 0, width, height)
+    let fontSize = (height / 114).toFixed(2);
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#4c5b68";
+
+    ctx.font = "bold " +fontSize + "em Verdana";
+    let percentageText = chart.config.data.percentageText || ""
+    let textX = Math.round((width - ctx.measureText(percentageText).width) / 2)
+    let textY = height / 2
+    ctx.fillText(percentageText, textX, textY - fontSize * 10);
+    ctx.font = (fontSize - fontSize/5)+ "em Verdana";
+    let kwhText = chart.config.data.kwhText || ""
+    let kwhTextX = Math.round((width - ctx.measureText(kwhText).width) / 2)
+    ctx.fillText(kwhText, kwhTextX, textY + fontSize * 5);
+
+    ctx.font = (fontSize - fontSize/2.5)+ "em Verdana";
+    let unitText = chart.config.data.unitText || ""
+    let unitTextX = Math.round((width - ctx.measureText(unitText).width) / 2)
+    ctx.fillText(unitText, unitTextX, textY + fontSize * 18);
+}
 
 
