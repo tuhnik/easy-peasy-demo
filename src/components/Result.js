@@ -124,7 +124,7 @@ function Result() {
         </div>
         <div className="donut-container">
             <span>Oma tarbeks</span>
-            <Doughnut height={100} width={100}data={donut1data} options={{
+            <Doughnut height={100} width={100} data={donut1data} options={{
                 cutoutPercentage: 70,
                 tooltips: {enabled: false},
                 legend: {display: false},
