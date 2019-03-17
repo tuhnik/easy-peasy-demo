@@ -95,7 +95,7 @@ function Result() {
        Tasuvusaeg: {Math.round(res.tasuvus.tasuvusaeg * 10) / 10} aastat<Br/>
        <hr/>
        <div className="graphs">
-        <div className="graph"> 2019<Br/>       
+        <div className="graph"> Esimese aasta toodangu jagunemine<Br/>       
             <Bar data={aastaandmed}/>
         </div>
         <div className="graph"> Tasuvus 25 aasta jooksul <Br/> 
