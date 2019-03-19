@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-body {
-    /* background-color: #ffffff;
-    background-image: url("https://www.transparenttextures.com/patterns/skulls.png"); */
-    color: #4c5b68;
-}
 
 div {
     padding: 0.1em
@@ -14,9 +9,6 @@ input, select {
     margin: 0 0.5em;
 }
 
-*{
-    font-family: 'Open Sans',serif;
- }
 
  .result-first {
      display: flex

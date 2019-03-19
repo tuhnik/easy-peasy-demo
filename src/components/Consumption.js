@@ -18,14 +18,14 @@ function Consumption() {
     }
 
     return <div className="Consumption">
-        Hoone tüüp: 
+        <b>Hoone tüüp:</b>
         <select onChange={handleSelect} value={type}>
             <option value="suvila">Suvila</option>
             <option value="elektriküte">Elektriküttega eramu</option>
             <option value="muu">Muu kütteliigiga eramu</option>
         </select><br/>
         Täpsemaks arvutuseks sisesta tarbimine: 
-        <input onChange={handleInput} value={consumption}></input>
+        <input onChange={handleInput} value={consumption} style={{width: "10em"}}></input>
     </div>
 }
 

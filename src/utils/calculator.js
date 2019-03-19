@@ -69,11 +69,11 @@ function calculator(hooneTüüp, tarbimine, paigaldusviis, pindala, kalle, orien
         let hoolduskulud = lisaInflatsioon(hoolduskulu, aasta)
 
         let tulud = {}
-        tulud.hinnavõit = (elektrihind + võrgutasu + taastuvenergiatasu + elektriaktsiis) * 1.2
-        tulud.hinnavõit = lisaInflatsioon(tulud.hinnavõit, aasta)
-        tulud.sääst = omaTarbeks * tulud.hinnavõit/100
-        tulud.elektrihind = lisaInflatsioon(elektrihind, aasta)
-        tulud.müükVõrku = müükVõrku * tulud.elektrihind/100
+            tulud.hinnavõit = (elektrihind + võrgutasu + taastuvenergiatasu + elektriaktsiis) * 1.2
+            tulud.hinnavõit = lisaInflatsioon(tulud.hinnavõit, aasta)
+            tulud.sääst = omaTarbeks * tulud.hinnavõit/100
+            tulud.elektrihind = lisaInflatsioon(elektrihind, aasta)
+            tulud.müükVõrku = müükVõrku * tulud.elektrihind/100
 
         if(aasta < 13) tulud.taastuvenergiatoetus = müükVõrku * taastuvenergiatoetus / 100
         else {tulud.taastuvenergiatoetus = 0}
@@ -86,10 +86,8 @@ function calculator(hooneTüüp, tarbimine, paigaldusviis, pindala, kalle, orien
 
         return {tarbimine: profiil.reduce((a, b) => a + b), kogutoodang, omaTarbeks, müükVõrku, hoolduskulud, tulud, rahavoog, kalender, omatarbimiseProtsent, müükVõrkuProtsent}
     }
-
     function tasuvusAeg(aastad){
         let arr = [-maksumusKM ]
-        console.log(arr)
         let rahavoog = [-maksumusKM]
         for (let i=1; i<aastad+1; i++ ){
             let data = projektiaasta(võimsus, i)

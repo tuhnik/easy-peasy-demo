@@ -5,6 +5,7 @@ import Area from './components/Area'
 import Roof from './components/Roof'
 import Orientation from './components/Orientation'
 import Result from './components/Result'
+import Form from './components/Form'
 import './App.css'
 
 
@@ -16,6 +17,7 @@ function App() {
     <Roof></Roof>
     <Orientation></Orientation>
     <Result></Result>
+    {/* <Form></Form> */}
   </div>
 }
 
