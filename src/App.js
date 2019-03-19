@@ -17,7 +17,7 @@ function App() {
     <Roof></Roof>
     <Orientation></Orientation>
     <Result></Result>
-    {/* <Form></Form> */}
+    <Form></Form>
   </div>
 }
 

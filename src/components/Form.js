@@ -25,7 +25,7 @@ function Form() {
         <button className ="button green big" onClick={openForm}>
         Küsi pakkumist</button>
     </div>
-    {formOpen && <div className="form">
+    <div className={formOpen?"form":"form closed"}>
         <div className="form-section">
             <div className="form-titlebox">
                 <h2>Küsi pakkumist</h2>
@@ -100,7 +100,7 @@ function Form() {
                 </div>
             </form>
         </div>
-    </div>}
+    </div>
     
     </>
 }
