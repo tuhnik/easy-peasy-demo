@@ -14,7 +14,7 @@ function Area() {
 
     return <div className="Area">
         Pindala
-        <input onChange={handleInput} value={area}></input>
+        <input onChange={handleInput} value={area || ""}></input>
     </div>
 }
 

@@ -17,13 +17,11 @@ function calculator(hooneTüüp, tarbimine, paigaldusviis, pindala, kalle, orien
     if (hooneTüüp === "suvila") võrgutasu = 5.5
     if (hooneTüüp === "muu") võrgutasu = 4.5
 
-
     let paneelideArv = Math.floor(pindala/paigaldusviis*0.8)
     let võimsus = paneelideArv * 0.285
     let maksumus = võimsus * (1.1084*Math.pow(võimsus,-0.103)) * 1000
     let maksumusKM = maksumus * 1.2
     let hoolduskulu = maksumus*(1.5/100) * 1.2
-
 
     let esimeneAasta = projektiaasta(võimsus, 1)
     let tasuvus = tasuvusAeg(25)
@@ -91,30 +89,33 @@ function calculator(hooneTüüp, tarbimine, paigaldusviis, pindala, kalle, orien
 
     function tasuvusAeg(aastad){
         let arr = [-maksumusKM ]
+        console.log(arr)
         let rahavoog = [-maksumusKM]
         for (let i=1; i<aastad+1; i++ ){
             let data = projektiaasta(võimsus, i)
             arr.push(arr[i-1] + data.rahavoog)
             rahavoog.push(data.rahavoog)
         }
+
+        let obj = {}
+        obj.maksumus = maksumusKM
+        obj.säästEsimeselAastal = rahavoog[1]
+        obj.säästKokku = rahavoog.slice(1).reduce((a, b) => a + b)
+        obj.kasum = rahavoog.reduce((a, b) => a + b)
+
         for (let i = 0; i<arr.length; i++){
             if(arr[i]>0) {
-            let obj = {}
-            obj.maksumus = maksumusKM
-            obj.tasuvusaeg = (i-1) + Math.abs(arr[i-1])/rahavoog[i]
-            obj.säästEsimeselAastal = rahavoog[1]
-            obj.säästKokku = rahavoog.slice(1).reduce((a, b) => a + b)
-            obj.kasum = rahavoog.reduce((a, b) => a + b)
-            obj.data = arr
+                obj.tasuvusaeg = (i-1) + Math.abs(arr[i-1])/rahavoog[i]
+                obj.data = arr
             return obj
             }
-            
-        }
-    
+            if(arr[i] < 0 && i === arr.length -1){
+                obj.tasuvusaeg = 0
+                obj.data = []
+                return obj
+            }
+        } 
     }
-
-
-
 
     function lisaInflatsioon(n, aasta){
         return n * Math.pow(1 + inflatsioon/1, aasta-1)
@@ -185,11 +186,7 @@ function calculator(hooneTüüp, tarbimine, paigaldusviis, pindala, kalle, orien
         }
     }
 
-
-
-
-
-    function leiaTootlikkus(orientatsioon, kalle){
+function leiaTootlikkus(orientatsioon, kalle){
         let data = {
             "-90": {
                 "5": 829.17,

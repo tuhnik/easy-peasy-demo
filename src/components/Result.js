@@ -25,7 +25,7 @@ function Result() {
         
         datasets: [{
             data: [res.esimeneAasta.omatarbimiseProtsent, 100 - res.esimeneAasta.omatarbimiseProtsent],
-            backgroundColor: ['#e89722', ] }],
+            backgroundColor: ['rgb(232,151,34)', ] }],
         percentageText: res.esimeneAasta.omatarbimiseProtsent + "%",
         kwhText: Math.round(res.esimeneAasta.omaTarbeks),
         unitText: "kWh"
@@ -33,10 +33,9 @@ function Result() {
     
     const donut2data = {
         labels: ['Oma tarbeks - '+ res.esimeneAasta.omatarbimiseProtsent + '%', 'Müük võrku - '+(100 - res.esimeneAasta.omatarbimiseProtsent)+ '%'],
-        
         datasets: [{
             data: [100 - res.esimeneAasta.omatarbimiseProtsent,  res.esimeneAasta.omatarbimiseProtsent],
-            backgroundColor: ['#5cbd4c'] }],
+            backgroundColor: ['rgb(92,189,76)'] }],
         percentageText: res.esimeneAasta.müükVõrkuProtsent + "%",
         kwhText: Math.round(res.esimeneAasta.müükVõrku),
         unitText: "kWh"
@@ -51,8 +50,8 @@ function Result() {
         labels: years,
         datasets: [{data: res.tasuvus.data.map(el=>Math.round(el)), 
             label: "EUR",
-            backgroundColor: "#8bc34a7c"
-        },        
+            backgroundColor: "rgba(139, 195 ,74 , 0.75)"
+        },    
         ]
     }
     const tasuvusoptions = {
@@ -83,7 +82,8 @@ function Result() {
             yAxes: [{
                 ticks: {callback: function(value, index, values) {
                     return value + " kWh"
-                }}
+                }},
+                stacked: true
             }]
         }
     }
@@ -93,19 +93,19 @@ function Result() {
         {data: cal_tarbimine.map(el=>Math.round(el)), 
             label: "Senine tarbimine (kWh)",
             type: "bar",
-            backgroundColor: "#03a9f444",
+            backgroundColor: "rgba(3, 169, 244, 0.5)",
             borderColor: "#03a9f4",
             borderWidth: 1
         },
         {data: cal_omatarbimine.map(el=>Math.round(el)), 
             label: "Oma tarbeks (kWh)",
             type: "line",
-            backgroundColor: "#e89722c7"
+            backgroundColor: "rgba(232, 151, 34, 0.75)"
         },
         {data: cal_võrku.map(el=>Math.round(el)), 
             label: "Müük võrku (kWh)",
             type: "line",
-            backgroundColor: "#5cbd4ca6"
+            backgroundColor: "rgba(92, 189, 76, 0.5)"
         }   
         ]
     }
@@ -142,11 +142,11 @@ function Result() {
          </div>
         </div> 
        <hr/>
-       Maksumus (KM-ga): {Math.round(res.tasuvus.maksumus)} €<Br/>
-       Eeldatav sääst 1. aastal: {Math.round(res.tasuvus.säästEsimeselAastal)} €<Br/>
-       Eeldatav sääst eluea (25 aastat) peale: {Math.round(res.tasuvus.säästKokku)} €<Br/>
-       Kasum eluea (25 aastat) peale: {Math.round(res.tasuvus.kasum)} €<Br/>
-       Tasuvusaeg: {Math.round(res.tasuvus.tasuvusaeg * 10) / 10} aastat<Br/>
+        Maksumus (KM-ga): {Math.round(res.tasuvus.maksumus)} €<Br/>
+        Eeldatav sääst 1. aastal: {Math.round(res.tasuvus.säästEsimeselAastal)} €<Br/>
+        Eeldatav sääst eluea (25 aastat) peale: {Math.round(res.tasuvus.säästKokku)} €<Br/>
+        Kasum eluea (25 aastat) peale: {Math.round(res.tasuvus.kasum)} €<Br/>
+        Tasuvusaeg: {Math.round(res.tasuvus.tasuvusaeg * 10) / 10} aastat<Br/>
        <hr/>
        <div className="graphs">
         <div className="graph"> Esimese aasta toodangu jagunemine<Br/>       
@@ -155,10 +155,8 @@ function Result() {
         <div className="graph"> Tasuvus 25 aasta jooksul <Br/> 
             <Line data={tasuvusandmed} options={tasuvusoptions}/>
         </div>
-       </div>
-       
+       </div>      
        <hr/>
-  
     </div>
 }
 
