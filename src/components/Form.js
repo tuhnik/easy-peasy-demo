@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
 function Form() {
-
+    const formRef = useRef(null);
     const [formOpen, setFormOpen] = useState(false)
+    const [formSent, setFormSent] = useState(false)
 
     function sendOffer(e){
         e.preventDefault()
+        setFormSent(true)
     }
 
     function closeForm(e){
@@ -13,19 +15,26 @@ function Form() {
         setFormOpen(false)
     }
 
-    function openForm(e){
+    function openForm(e){ 
         setFormOpen(true)
+        setTimeout(()=>{
+            const element = document.getElementsByClassName("form")[0];
+            element.scrollIntoView({behavior: 'smooth'});
+        }, 250)     
     }
 
 
+    if(formSent){
+        return <div>Andmed saadetud. Võtame teiega ühendust esimesel võimalusel!</div>
+    }
+
 
     return <>
-    
     <div className="content-item">
         <button className ="button green big" onClick={openForm}>
         Küsi pakkumist</button>
     </div>
-    <div className={formOpen?"form":"form closed"}>
+    <div className={formOpen?"form form-open":"form form-closed"} ref={formRef}>
         <div className="form-section">
             <div className="form-titlebox">
                 <h2>Küsi pakkumist</h2>
@@ -94,7 +103,7 @@ function Form() {
                 </div>
                 <div className="form-row">
                     <div className="buttons clearfix">
-                        <button className="button green full" onClick={sendOffer}>Saadan!</button> {" "}
+                        <button className="button green full" onClick={sendOffer}>Saadan</button> {" "}
                         <button className="button alternate full" onClick={closeForm}>Katkestan</button>
                     </div>
                 </div>
