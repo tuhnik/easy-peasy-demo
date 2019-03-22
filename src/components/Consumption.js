@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useStore, useActions } from 'easy-peasy';
-
+import { I18nContext } from '../i18n';
 
 function Consumption() {
-
+    const { t } = useContext(I18nContext);
     const consumption = useStore(state => state.input.consumption)
     const changeConsumption = useActions(actions => actions.input.changeConsumption)
     const type = useStore(state => state.input.buildingType)
@@ -18,11 +18,11 @@ function Consumption() {
     }
 
     return <div className="Consumption">
-        <b>Hoone tüüp:</b>
+        <b>{t('hoone_tüüp')}:</b>
         <select onChange={handleSelect} value={type}>
-            <option value="suvila">Suvila</option>
-            <option value="elektriküte">Elektriküttega eramu</option>
-            <option value="muu">Muu kütteliigiga eramu</option>
+            <option value="suvila">{t('suvila')}</option>
+            <option value="elektriküte">{t('elektriküttega_eramu')}</option>
+            <option value="muu">{t('muu_kütteliigiga_eramu')}</option>
         </select><br/>
         Täpsemaks arvutuseks sisesta tarbimine: 
         <input onChange={handleInput} value={consumption} style={{width: "10em"}}></input>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Consumption from './components/Consumption'
 import SetupType from './components/SetupType'
 import Area from './components/Area'
@@ -7,7 +7,6 @@ import Orientation from './components/Orientation'
 import Result from './components/Result'
 import Form from './components/Form'
 import './App.css'
-
 
 function App() {
   return <div className="App">
