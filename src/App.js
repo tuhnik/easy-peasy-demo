@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React from 'react';
 import Consumption from './components/Consumption'
 import SetupType from './components/SetupType'
 import Area from './components/Area'

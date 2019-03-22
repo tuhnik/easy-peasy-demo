@@ -9,11 +9,12 @@ function calculator(hooneTüüp, tarbimine, paigaldusviis, pindala, kalle, orien
     let inflatsioon = 0.02
 
     let elektrihind = 5 //s/kWh
-    let võrgutasu = 3.5 //s/kWh
     let taastuvenergiatasu = 1.04 //s/kWh
     let elektriaktsiis = 0.447 //s/kWh
     let taastuvenergiatoetus = 5.37 //skWh
+    let võrgutasu //s/kWh
 
+    if (hooneTüüp === "elektriküte") võrgutasu = 3.5
     if (hooneTüüp === "suvila") võrgutasu = 5.5
     if (hooneTüüp === "muu") võrgutasu = 4.5
 
@@ -65,7 +66,7 @@ function calculator(hooneTüüp, tarbimine, paigaldusviis, pindala, kalle, orien
         let omaTarbeks = kogutoodang * omatarbimiseProtsent
         let müükVõrku = kogutoodang - omaTarbeks 
 
-        let kalender = kuuKaupa(profiil, omatarbimine, võrku) //returni graafiku joonistamiseks
+        let kalender = kuuKaupa(profiil, omatarbimine, võrku)
         let hoolduskulud = lisaInflatsioon(hoolduskulu, aasta)
 
         let tulud = {}
